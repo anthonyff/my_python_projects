@@ -1,0 +1,37 @@
+Code for “”R_NFL”
+
+
+nfl <- read.csv(file="2015_nfl_prices_wins.csv", head=TRUE, sep=",")
+
+library(reshape) 
+
+melt(nfl) 
+
+ggplot(nfl, aes(factor(Team), value, fill=variable)) + ylim(0,500) + ggtitle("NFL 2015 Season Ticket Prices and Win Percentages") + labs(x="", y="") + geom_bar(stat="identity", position="dodge") + scale_fill_brewer(palette = "Set1") + theme(axis.text.x=element_text(angle=45, hjust=1))
+
+
+
+
+
+
+
+
+
+
+
+Code for “R_MLB”
+
+
+salaries <- read.csv(file="salary.csv", head=TRUE, sep=",")
+
+library(reshape)
+library(scales) 
+
+salary1 <- cast(sal, year ~ league, mean, value='salary')
+
+
+salary2 <- melt(sald, id="year")
+
+
+ggplot(data=salary2, aes(x=year, y=value, colour=league)) +geom_line() + theme_gdocs() + scale_colour_gdocs() + ggtitle("Average salary of AL vs. NL baseball players") + labs(x="Year", y="Salary") + scale_y_continuous(labels=comma) + theme(legend.title=element_text(colour="chocolate", size=16, face="bold")) +  
+scale_color_discrete(name="League")   
